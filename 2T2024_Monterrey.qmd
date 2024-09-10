@@ -7,7 +7,7 @@ prefer-html: true
 always_allow_html: yes
 ---
 
-```{r xaringan-themer, include=FALSE, warning=FALSE}
+```{r xaringan-themer, warning=FALSE, include=FALSE}
 pacman::p_load(
   xaringanthemer, plotly, purrr,
   readr, magrittr,
@@ -33,7 +33,7 @@ La ENSU **se enfoca en medir la percepción de seguridad publica** de la poblac
 
 El tamaño muestral de la ENSU, ha aumentado a lo largo de los trimestres volviéndose más representativa:
 
-```{r, echo=FALSE}
+```{r echo=FALSE}
 table <- tibble(
   titulo = c(
     "Periodo de referencia*",
@@ -51,15 +51,15 @@ table <- tibble(
   )
 )
 
-ft <- table %>% 
-  flextable() %>% 
+ft <- table %>%
+  flextable() %>%
   delete_part(
     part = "header"
-  ) %>% 
+  ) %>%
   bold(
     j = 1,
     part = "body"
-  ) %>% 
+  ) %>%
   theme_zebra()
 
 ft
@@ -87,85 +87,83 @@ En el presente documento se consideraron estos parámetros al momento de analiz
     El coeficiente de variación es una medida de tendencia central que nos indica la desviación de los datos observados con respecto a la media y, al mismo tiempo, las dispersiones que tienen los datos dispersos entre sí. Se calcula dividiendo la desviación estándar de la muestra, entre la media de la muestra.
     :::
 
-# Introducción
+# Introduccion
 
 La **cobertura temática de la ENSU** es la siguiente:
 
-- Sensación de inseguridad por temor al delito.
-- Expectativa sobre la tendencia del delito.
-- Atestiguación de conductas delictivas o antisociales.
-- Cambio de rutinas por temor a ser víctimas del delito.
-- Desempeño de la policía como autoridad de seguridad pública.
-- Conflictos y conductas antisociales.
-- Desempeño gubernamental.
-- Consulta de información sobre seguridad pública.
-- Conocimiento sobre programas de prevención del delito.
-- Violencia en el entorno familiar.
+-   Sensación de inseguridad por temor al delito.
+-   Expectativa sobre la tendencia del delito.
+-   Atestiguación de conductas delictivas o antisociales.
+-   Cambio de rutinas por temor a ser víctimas del delito.
+-   Desempeño de la policía como autoridad de seguridad pública.
+-   Conflictos y conductas antisociales.
+-   Desempeño gubernamental.
+-   Consulta de información sobre seguridad pública.
+-   Conocimiento sobre programas de prevención del delito.
+-   Violencia en el entorno familiar.
 
 # Percepción de inseguridad
 
-# Evolución en la percepción de inseguridad 
+# Evolución en la percepción de inseguridad
 
-![### Evolucion en la percepción de inseguridad](03_grafs/ensu_perc2.png)
-# Kable
+![\### Evolucion en la percepción de inseguridad](03_grafs/ensu_perc2.png) \# Percepción en capitales
 
-```{r, echo = FALSE}
-library(knitr)
-data <- data.frame(
-  Column1 = c("A", "B", "C"),
-  Column2 = c(1, 2, 3),
-  Column3 = c("X", "Y", "Z")
-)
-data %>%
-  kable(format = "pipe", caption = "Caption") %>%
-  column_spec(
-    column = 2,
-    bold = TRUE
-  )
+![Comparativo Capitales](03_grafs/ensu_percep_capitales_Rev_OATC.png)
+
+# Percepción en capitales
+
+![Comparativo Capitales](03_grafs/ensu_percep_minmax.png)
+
+# Percepción en capitales
+
+```{r}
+ipsum()
 ```
 
-# Imagen de tabla
+# Sensación de inseguridad en espacio publico
 
 ::: columns
-::: column
-```{r}
-ft <- flextable(airquality[sample.int(10), ])
-ft <- add_header_row(ft,
-  colwidths = c(4, 2),
-  values = c("Air quality", "Time")
-)
-ft <- theme_vanilla(ft)
-ft <- add_footer_lines(ft, "Daily air quality measurements in New York, May to September 1973.")
-ft <- color(ft, part = "footer", color = "#666666")
-ft <- set_caption(ft, caption = "New York Air Quality Measurements")
-```
+::: {.column width="50%"}
+![Percepción de inseguridad por lugar 1](03_grafs/ensu_sens_inseg_primeros.png)
 :::
 
-::: column
+::: {.column width="50%"}
+![Percepción de inseguridad por lugar 2](03_grafs/ensu_sens_inseg_ultimos.png)
+:::
+:::
+
+# Sensación de inseguridad en espacio público
+
+::: columns
+::: {.column width="50%"}
 ```{r}
+ipsum()
+```
+
+:::
+
+::: {.column width="50%"}
+```{r echo = FALSE}
+tabla_lugares <- read_csv(
+  "04_temp/tabla_lugares.csv"
+)
+
+ft <- tabla_lugares %>%
+  flextable() %>% 
+  align(
+    align = "center",
+    part = "all"
+  ) %>% 
+  bold(
+    j = 1
+  ) %>% 
+  bg(
+    j = 6, 
+    bg = c("#4E94A5", "#64B2B2", "#64B2B2", "#7BBFB3", "#7BBFB3", "#7BBFB3", "#7BBFB3", "#DE7D87", "#DE7D87", "#DE7D87", "#CE7352", "#CE7352")
+  )
+
 ft
 ```
-:::
-:::
 
-# Flextable
-
-::: columns
-::: column
-```{r}
-ft <- flextable(airquality[sample.int(10), ])
-ft <- add_header_row(ft,
-  colwidths = c(4, 2),
-  values = c("Air quality", "Time")
-)
-ft <- theme_vanilla(ft)
-ft <- add_footer_lines(ft, "Daily air quality measurements in New York, May to September 1973.")
-ft <- color(ft, part = "footer", color = "#666666")
-ft <- set_caption(ft, caption = "New York Air Quality Measurements")
-```
-:::
-
-::: column
-`r ft`
 :::
 :::
