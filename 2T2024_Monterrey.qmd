@@ -1,6 +1,6 @@
 ---
 title: "ENSU Q2 2024"
-author: "Oliver:)"
+author: "Oliver Camacho"
 format: pptx
 editor: visual
 prefer-html: true
@@ -25,41 +25,88 @@ pacman::p_load(
 
 # Introducción
 
-```{r}
-lorem::ipsum()
+El presente análisis tiene como objetivo mostrar los resultados presentados por la **Encuesta Nacional de Seguridad Pública Urbana (ENSU)** en la ciudad de Monterrey y mostrar cómo dichos resultados se comparan con el promedio de todas las ciudades consideradas por dicha encuesta a nivel nacional.
+
+La ENSU **se enfoca en medir la percepción de seguridad publica** de la población mayor de 18 años residente de las principales ciudades de México. Esta encuesta se realiza desde el tercer trimestre de 2013 y sirve como un seguimiento trimestral de temas tratados de manera anual y a mayor profundidad por la Encuesta Nacional de Victimización y Percepción sobre Seguridad Pública (ENVIPE).
+
+# Introducción
+
+El tamaño muestral de la ENSU, ha aumentado a lo largo de los trimestres volviéndose más representativa:
+
+```{r, echo=FALSE}
+table <- tibble(
+  titulo = c(
+    "Periodo de referencia*",
+    "Unidades de observación",
+    "Población objeto de estudio",
+    "Tamaño de muestra",
+    "Cobertura geográfica"
+  ),
+  descripcion = c(
+    "Del 1° Trimestre de 2016 a 2° Trimestre de 2024",
+    "Las viviendas seleccionadas, los hogares y los residentes del hogar y las personas seleccionadas en el hogar",
+    "Población de 18 años y más",
+    "11,400-27,850 viviendas a nivel nacional y 300 viviendas en Monterrey",
+    "75 ciudades a nivel nacional y 7 en Nuevo León "
+  )
+)
+
+ft <- table %>% 
+  flextable() %>% 
+  delete_part(
+    part = "header"
+  ) %>% 
+  bold(
+    j = 1,
+    part = "body"
+  ) %>% 
+  theme_zebra()
+
+ft
 ```
 
-Una referencia que se viene al final[^1]
+*Fuente*: Documentación de ENSU (INEGI).[^1]
 
-[^1]: Nota de pie
+[^1]:
+    ::: aside
+    *Nota*: Debido a la pandemia ocasionada por el COVID-19, no se realizó la ENSU del Tercer trimestre de 2020.
+    :::
 
-::: footer
-Una nota al pie de la diapositiva
-:::
+# Introducción
 
-# Imagen
+INEGI utiliza el **coeficiente de variación** (CV) para determinar si las estimaciones de la ENSU son precisas, de acuerdo a los siguientes parámetros:
 
-![](ensu_perc2.png)
+-   Alto si el CV se encuentra entre 0% y 15%.
+-   Moderado si el CV se encuentra entre 15% y 30%.
+-   Bajo si el CV es mayor a 30%.
 
-# Dos columnas
+En el presente documento se consideraron estos parámetros al momento de analizar los resultados nacionales y de Monterrey, todos los datos aquí presentados son estimaciones significativas, es decir por debajo del umbral del 30% en sus coeficiente de variación.[^2]
 
-::: columns
-::: column
-![](ensu_cam_ruti.png)
-:::
+[^2]:
+    ::: aside
+    El coeficiente de variación es una medida de tendencia central que nos indica la desviación de los datos observados con respecto a la media y, al mismo tiempo, las dispersiones que tienen los datos dispersos entre sí. Se calcula dividiendo la desviación estándar de la muestra, entre la media de la muestra.
+    :::
 
-::: column
-`r ipsum()`
-:::
-:::
+# Introducción
 
-# Markdown
+La **cobertura temática de la ENSU** es la siguiente:
 
-| Header 1    | Header 2    | Header 3    |
-|-------------|-------------|-------------|
-| Row 1 Col 1 | Row 1 Col 2 | Row 1 Col 3 |
-| Row 2 Col 1 | Row 2 Col 2 | Row 2 Col 3 |
+- Sensación de inseguridad por temor al delito.
+- Expectativa sobre la tendencia del delito.
+- Atestiguación de conductas delictivas o antisociales.
+- Cambio de rutinas por temor a ser víctimas del delito.
+- Desempeño de la policía como autoridad de seguridad pública.
+- Conflictos y conductas antisociales.
+- Desempeño gubernamental.
+- Consulta de información sobre seguridad pública.
+- Conocimiento sobre programas de prevención del delito.
+- Violencia en el entorno familiar.
 
+# Percepción de inseguridad
+
+# Evolución en la percepción de inseguridad 
+
+![### Evolucion en la percepción de inseguridad](03_grafs/ensu_perc2.png)
 # Kable
 
 ```{r, echo = FALSE}
@@ -70,21 +117,43 @@ data <- data.frame(
   Column3 = c("X", "Y", "Z")
 )
 data %>%
-  kable(format = "pipe", caption = "Caption") %>% column_spec(
-    column = 2, 
-    bold = TRUE)
+  kable(format = "pipe", caption = "Caption") %>%
+  column_spec(
+    column = 2,
+    bold = TRUE
+  )
 ```
 
 # Imagen de tabla
 
-![](gt_table.png)
+::: columns
+::: column
+```{r}
+ft <- flextable(airquality[sample.int(10), ])
+ft <- add_header_row(ft,
+  colwidths = c(4, 2),
+  values = c("Air quality", "Time")
+)
+ft <- theme_vanilla(ft)
+ft <- add_footer_lines(ft, "Daily air quality measurements in New York, May to September 1973.")
+ft <- color(ft, part = "footer", color = "#666666")
+ft <- set_caption(ft, caption = "New York Air Quality Measurements")
+```
+:::
+
+::: column
+```{r}
+ft
+```
+:::
+:::
 
 # Flextable
 
 ::: columns
 ::: column
 ```{r}
-ft <- flextable(airquality[ sample.int(10),])
+ft <- flextable(airquality[sample.int(10), ])
 ft <- add_header_row(ft,
   colwidths = c(4, 2),
   values = c("Air quality", "Time")
