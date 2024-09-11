@@ -69,10 +69,7 @@ ft
 
 *Fuente*: Documentación de ENSU (INEGI).[^1]
 
-[^1]:
-    ::: aside
-    *Nota*: Debido a la pandemia ocasionada por el COVID-19, no se realizó la ENSU del Tercer trimestre de 2020.
-    :::
+[^1]: *Nota*: Debido a la pandemia ocasionada por el COVID-19, no se realizó la ENSU del Tercer trimestre de 2020.
 
 ## Introducción
 
@@ -84,14 +81,11 @@ INEGI utiliza el **coeficiente de variación** (CV) para determinar si las esti
 
 En el presente documento se consideraron estos parámetros al momento de analizar los resultados nacionales y de Monterrey, todos los datos aquí presentados son estimaciones significativas, es decir por debajo del umbral del 30% en sus coeficiente de variación.[^2]
 
-[^2]:
-    ::: aside
-    El coeficiente de variación es una medida de tendencia central que nos indica la desviación de los datos observados con respecto a la media y, al mismo tiempo, las dispersiones que tienen los datos dispersos entre sí. Se calcula dividiendo la desviación estándar de la muestra, entre la media de la muestra.
-    :::
+[^2]: aside El coeficiente de variación es una medida de tendencia central que nos indica la desviación de los datos observados con respecto a la media y, al mismo tiempo, las dispersiones que tienen los datos dispersos entre sí. Se calcula dividiendo la desviación estándar de la muestra, entre la media de la muestra.
 
 ## Introducción
 
-La **cobertura temática de la ENSU** es la siguiente:
+La **cobertura tematica de la ENSU** es la siguiente:
 
 -   Sensación de inseguridad por temor al delito.
 -   Expectativa sobre la tendencia del delito.
@@ -241,7 +235,7 @@ ft
 
 ## La distancia entre la percepción y la victimización
 
-![Comparativo percepción, atesti y victi](03_grafs/ensu_compilado_1.png)
+![Comparativo percepcion, atesti y victi](03_grafs/ensu_compilado_1.png)
 
 ## Cambio de hábitos por inseguridad
 
@@ -269,35 +263,136 @@ El evitar llevar cosas de valor en la calle y caminar de noche alrededor de sus 
 
 ## Principales problemas en Monterrey
 
-Los 5 delitos más percibido:
+Los 5 problemas más percibidos:
 
 ```{r Principales problemas, echo=FALSE}
 
-lugares <- read_rds(
-  "04_temp/df_percep_lugares_publicos.rds"
+problemas <- read_rds(
+  "04_temp/df_problemas_principales.rds"
 )
 
-ft <- lugares %>% 
-  select(-c("resp", "fecha")) %>% 
-  filter(trim == max(trim)) %>% 
-  arrange(desc(por))
+ft <- problemas %>% 
+  select(-resp) %>% 
+  filter(fecha >= "Jun 2023") %>%
+  pivot_wider(
+    names_from = fecha,
+    values_from = total
+  ) %>%
+  arrange(desc(`Jun 2024`)) %>% 
   head(5) %>% 
-  flextable() %>%
+  flextable(
+    col_keys = c(
+      "var_cd", "var", "Jun 2024", "Jun 2023", "Dec 2023"
+    )
+  ) %>%
   set_header_labels(
     values = c(
-      var_id = "Var",
-      var = "Tipo"
+      var_cd = "Ciudad",
+      var = "Problema"
     )
   ) %>% 
   set_formatter(
-    por = function(x) label_percent(0.1)(x)
+    `Jun 2023` = function(x) label_percent(0.1)(x),
+    `Jun 2024` = function(x) label_percent(0.1)(x),
+    `Dec 2023` = function(x) label_percent(0.1)(x)
   ) %>% 
-  colformat_date(
-    j = "fecha",
-    fmt_date = "%d/%m/%Y")
+  theme_vanilla()
 
 ft
 ```
 
+## Principales problemas en Monterrey
 
+::: columns
+::: column
+![Principales problemas trimestres](03_grafs/ensu_prob_P.png)
+:::
+
+::: column
+```{r echo=FALSE}
+ft
+```
+:::
+:::
+
+## Principales problemas en Monterrey
+
+![Confianza SP 1](03_grafs/ensu_problemas_serie_REV.png)
+
+# (Des) Confianza en las autoridades
+
+## (Des) Confianza en autoridades de seguridad pública
+
+::: columns
+::: column
+![Confianza SP 2](03_grafs/ensu_confianza_spPRUEBA1.png)
+:::
+
+::: column
+```{r}
+confianza <- read_rds(
+  "04_temp/df_confianza_sp_reciente.rds"
+)
+
+ft <- confianza %>% 
+  filter(
+    resp == "Desconfía",
+    fecha == max(fecha)
+  ) %>% 
+  flextable(
+    col_keys = c(
+      "var_id",
+      "var",
+      "resp",
+      "por"
+      )
+  ) %>% 
+  set_formatter(
+    por = function(x) label_percent(0.1)(x)
+  ) %>% 
+  set_header_labels(
+    values = c(
+      var_id = "Ciudad",
+      var = "Policía",
+      resp = "Respuesta",
+      por = "Porcentaje de gente que desconfía"
+    )
+  )
+
+ft
+```
+:::
+:::
+
+## Confianza en autoridades de seguridad pública
+
+![Serie de tiempo de confianza](03_grafs/ensu_confianza_serie_P.png)
+
+## Confianza en autoridades de seguridad pública
+
+![Serie de tiempo de confianza](03_grafs/ensu_conf_ppm.png)
+
+------------------------------------------------------------------------
+
+```{r echo=FALSE}
+
+confianza_ppm <- read_rds(
+  "04_temp/df_confianza_policia.rds"
+)
+
+# Primera mitad de la tabla
+(ft1 <- confianza_ppm %>% 
+  select(-fecha) %>% 
+  head(10) %>% 
+  flextable() %>%
+  width(
+    j = "var",
+    width = 1.5
+  ) %>% 
+  set_formatter(
+    por = function(x) label_percent(0.1)(x)
+  )
+  
+# Segunda mitad de la tabla 
+```
 

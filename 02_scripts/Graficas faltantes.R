@@ -124,7 +124,7 @@ files <- list.files(path = "01_input/DATOS_ENSU/CB", pattern = "*.dbf", full.nam
 #* Serie de tiempo confianza en autoridades de SP
 #*
 pacman::p_load(shadowtext)
-files_temp <- files[(grep("0324|0624", files, ignore.case = T))]
+(files_temp <- files[(grep("0324|0624", files, ignore.case = T))])
 
 ensu_full <- map(files_temp, function(x) {
   fecha <- str_extract(x, "(?<=ENSU_CB_)(\\d+)")
@@ -228,6 +228,8 @@ df_graf <- ensu_full %>%
     fecha = zoo::as.yearmon(fecha, format = "%B/%Y"),
     var_id = str_to_title(var_id)
   )
+
+write_rds(df_graf, "04_temp/df_confianza_sp_reciente.rds")
 
 graf <- ggplot(
   df_graf,
