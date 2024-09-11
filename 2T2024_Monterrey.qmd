@@ -200,8 +200,31 @@ ft
 
 ## Experiencias de inseguridad
 
-```{r}
-ipsum()
+```{r Atestiguación, echo=FALSE}
+
+atesti <- read_rds(
+  "04_temp/df_atestiguacion.rds"
+)
+
+ft <- atesti %>% 
+  select(-resp) %>% 
+  filter(fecha == max(fecha)) %>% 
+  head(5) %>% 
+  flextable() %>%
+  set_header_labels(
+    values = c(
+      var_id = "Var",
+      var = "Tipo"
+    )
+  ) %>% 
+  set_formatter(
+    por = function(x) label_percent(0.1)(x)
+  ) %>% 
+  colformat_date(
+    j = "fecha",
+    fmt_date = "%d/%m/%Y")
+
+ft
 ```
 
 # Condición de victimización en hogares[^3]
@@ -248,15 +271,16 @@ El evitar llevar cosas de valor en la calle y caminar de noche alrededor de sus 
 
 Los 5 delitos más percibido:
 
-```{r Atestiguación, echo=FALSE}
+```{r Principales problemas, echo=FALSE}
 
-atesti <- read_rds(
-  "04_temp/df_atestiguacion.rds"
+lugares <- read_rds(
+  "04_temp/df_percep_lugares_publicos.rds"
 )
 
-ft <- atesti %>% 
-  select(-resp) %>% 
-  filter(fecha == max(fecha)) %>% 
+ft <- lugares %>% 
+  select(-c("resp", "fecha")) %>% 
+  filter(trim == max(trim)) %>% 
+  arrange(desc(por))
   head(5) %>% 
   flextable() %>%
   set_header_labels(
@@ -275,6 +299,5 @@ ft <- atesti %>%
 ft
 ```
 
-# Condición de victimización en hogares
 
-sadasdad
+
