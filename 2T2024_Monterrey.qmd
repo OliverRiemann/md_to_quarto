@@ -25,11 +25,13 @@ pacman::p_load(
 
 # Introducción
 
+## Introducción
+
 El presente análisis tiene como objetivo mostrar los resultados presentados por la **Encuesta Nacional de Seguridad Pública Urbana (ENSU)** en la ciudad de Monterrey y mostrar cómo dichos resultados se comparan con el promedio de todas las ciudades consideradas por dicha encuesta a nivel nacional.
 
 La ENSU **se enfoca en medir la percepción de seguridad publica** de la población mayor de 18 años residente de las principales ciudades de México. Esta encuesta se realiza desde el tercer trimestre de 2013 y sirve como un seguimiento trimestral de temas tratados de manera anual y a mayor profundidad por la Encuesta Nacional de Victimización y Percepción sobre Seguridad Pública (ENVIPE).
 
-# Introducción
+## Introducción
 
 El tamaño muestral de la ENSU, ha aumentado a lo largo de los trimestres volviéndose más representativa:
 
@@ -72,7 +74,7 @@ ft
     *Nota*: Debido a la pandemia ocasionada por el COVID-19, no se realizó la ENSU del Tercer trimestre de 2020.
     :::
 
-# Introducción
+## Introducción
 
 INEGI utiliza el **coeficiente de variación** (CV) para determinar si las estimaciones de la ENSU son precisas, de acuerdo a los siguientes parámetros:
 
@@ -87,7 +89,7 @@ En el presente documento se consideraron estos parámetros al momento de analiz
     El coeficiente de variación es una medida de tendencia central que nos indica la desviación de los datos observados con respecto a la media y, al mismo tiempo, las dispersiones que tienen los datos dispersos entre sí. Se calcula dividiendo la desviación estándar de la muestra, entre la media de la muestra.
     :::
 
-# Introduccion
+## Introducción
 
 La **cobertura temática de la ENSU** es la siguiente:
 
@@ -104,23 +106,27 @@ La **cobertura temática de la ENSU** es la siguiente:
 
 # Percepción de inseguridad
 
-# Evolución en la percepción de inseguridad
+## Evolución en la percepción de inseguridad
 
-![\### Evolucion en la percepción de inseguridad](03_grafs/ensu_perc2.png) \# Percepción en capitales
+![](03_grafs/ensu_perc2.png)
 
-![Comparativo Capitales](03_grafs/ensu_percep_capitales_Rev_OATC.png)
+## Percepción en capitales
 
-# Percepción en capitales
+![](03_grafs/ensu_percep_capitales_Rev_OATC.png)
 
-![Comparativo Capitales](03_grafs/ensu_percep_minmax.png)
+## Percepción en capitales
 
-# Percepción en capitales
+![](03_grafs/ensu_percep_minmax.png)
+
+## Percepción en capitales
 
 ```{r}
 ipsum()
 ```
 
 # Sensación de inseguridad en espacio publico
+
+## Sensación de inseguridad en espacio publico
 
 ::: columns
 ::: {.column width="50%"}
@@ -132,14 +138,13 @@ ipsum()
 :::
 :::
 
-# Sensación de inseguridad en espacio público
+## Sensación de inseguridad en espacio público
 
 ::: columns
 ::: {.column width="50%"}
 ```{r}
 ipsum()
 ```
-
 :::
 
 ::: {.column width="50%"}
@@ -164,6 +169,110 @@ ft <- tabla_lugares %>%
 
 ft
 ```
+:::
+:::
 
+# Experiencias de inseguridad
+
+## Experiencias de inseguridad
+
+![Consumo de alcohol](03_grafs/ensu_atesti_1Consumo%20de%20alcohol%20en%20las%20calles.png)
+
+## Experiencias de inseguridad
+
+![Robos o asaltos](03_grafs/ensu_atesti_2Robos%20o%20asaltos.png)
+
+## Experiencias de inseguridad
+
+![Disparos frecuentes](03_grafs/ensu_atesti_3Disparos%20frecuentes%20con%20armas.png)
+
+## Experiencias de inseguridad
+
+![Vandalismo](03_grafs/ensu_atesti_4Vandalismo.png)
+
+## Experiencias de inseguridad
+
+![Venta o consumo de drogas](03_grafs/ensu_atesti_5Venta%20o%20consumo%20de%20drogas.png)
+
+## Experiencias de inseguridad
+
+![Pandillerismo](03_grafs/ensu_atesti_6Pandillerismo.png)
+
+## Experiencias de inseguridad
+
+```{r}
+ipsum()
+```
+
+# Condición de victimización en hogares[^3]
+
+[^3]: La sección de víctimas solo se incluye en Septiembre y diciembre a excepción de 2020 que se levantó en septiembre y diciembre.
+
+## Condición de victimización en hogares
+
+![Hogares con víctimas](03_grafs/ensu_vict.png)
+
+## Tipo de victimas en el hogar
+
+![Tipo de víctimas](03_grafs/ensu_tip_vict.png)
+
+## La distancia entre la percepción y la victimización
+
+![Comparativo percepción, atesti y victi](03_grafs/ensu_compilado_1.png)
+
+## Cambio de hábitos por inseguridad
+
+::: columns
+::: {.column width="50%"}
+![Cambio de rutina](03_grafs/ensu_cam_ruti.png)
+:::
+
+::: {.column width="50%"}
+A pesar de que la percepción de inseguridad en Monterrey se mantiene por debajo de los niveles del 2do trimestre de 2018, las personas encuestadas reportan haber modificado sus habitos por la inseguridad como método de prevención.
+
+Con respecto al trimestre pasado, **el cambio de hábitos por la inseguridad tuvo una ligera disminución en todos los rubros**, acercándose a los niveles reportados en septiembre de 2022.
+
+El evitar llevar cosas de valor en la calle y caminar de noche alrededor de sus viviendas son los cambios de rutina que más implementan los regios.
 :::
 :::
+
+## Causas de conflictos en municipios de la ZM de Monterrey
+
+![Causas de conflctos](03_grafs/ensu_conflict.png)
+
+## Principales problemas en Monterrey
+
+![Causas de Conflicto 2](03_grafs/ensu_conflicto_mty.png)
+
+## Principales problemas en Monterrey
+
+Los 5 delitos más percibido:
+
+```{r Atestiguación, echo=FALSE}
+
+atesti <- read_rds(
+  "04_temp/df_atestiguacion.rds"
+)
+
+ft <- atesti %>% 
+  select(-resp) %>% 
+  filter(fecha == max(fecha)) %>% 
+  head(5) %>% 
+  flextable() %>%
+  set_header_labels(
+    values = c(
+      var_id = "Var",
+      var = "Tipo"
+    )
+  ) %>% 
+  set_formatter(
+    por = function(x) label_percent(0.1)(x)
+  ) %>% 
+  colformat_date(
+    j = "fecha",
+    fmt_date = "%d/%m/%Y")
+
+ft
+```
+
+# Condición de victimización en hogares
