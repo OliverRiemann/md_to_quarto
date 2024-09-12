@@ -207,8 +207,10 @@ ft <- atesti %>%
   flextable() %>%
   set_header_labels(
     values = c(
-      var_id = "Var",
-      var = "Tipo"
+      var_id = "Ciudad",
+      var = "Delito",
+      por = "Porcentaje",
+      fecha = "Fecha"
     )
   ) %>% 
   set_formatter(
@@ -216,7 +218,7 @@ ft <- atesti %>%
   ) %>% 
   colformat_date(
     j = "fecha",
-    fmt_date = "%d/%m/%Y")
+    fmt_date = "%d/%m/%Y") 
 
 ft
 ```
@@ -391,8 +393,7 @@ confianza_ppm <- read_rds(
   ) %>% 
   set_formatter(
     por = function(x) label_percent(0.1)(x)
-  )
+  ))
   
 # Segunda mitad de la tabla 
 ```
-

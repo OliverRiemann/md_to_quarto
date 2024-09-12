@@ -339,8 +339,8 @@ files <- list.files(
   full.names = T, recursive = T
 )
 
-files_temp <- files[(grepl("24|23.dbf|22.dbf|21.dbf|20.dbf|19.dbf", 
-                           files, ignore.case = T))]
+(files_temp <- files[(grepl("24|23.dbf|22.dbf|21.dbf|20.dbf|19.dbf", 
+                           files, ignore.case = T))])
 ensu_full <- map(files_temp, function(x) {
   print(x)
 
