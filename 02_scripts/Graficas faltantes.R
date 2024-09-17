@@ -32,7 +32,6 @@ ensu_full <- map(files, function(x) {
   vars <- list(list("var_id", "bp3_6"), list("var_cd", "bp3_6"))
 
   map(vars, function(v) {
-
     temp2 %>%
       group_by_at(.vars = unlist(v)) %>%
       summarise(
@@ -77,9 +76,10 @@ ggplot(
   aes(x = por, y = fct_rev(as.factor(var_id)), fill = fct_rev(bp3_6))
 ) +
   geom_bar(stat = "identity", position = "stack") +
-  geom_text(data = df_percp %>% 
-              filter(por > 0.04),
-            aes(label = percent(por, accuracy = 0.1)),
+  geom_text(
+    data = df_percp %>%
+      filter(por > 0.04),
+    aes(label = percent(por, accuracy = 0.1)),
     fontface = "bold", family = "Montserrat", size = 7, color = "white",
     position = position_stack(vjust = 0.5), show.legend = F
   ) +
@@ -98,7 +98,8 @@ ggplot(
 
 
 ggsave(paste0(path_output, "ensu_corrupcion.png"), graf,
-       width = 11, height = 9)
+  width = 11, height = 9
+)
 
 
 
@@ -293,9 +294,9 @@ ensu_full <- map(files_temp, function(x) {
 
   fecha_var <- str_extract(x, "(?<=ENSU_CB_)(\\d+)")
 
-  
+
   temp <- foreign::read.dbf(x) %>%
-      clean_names()
+    clean_names()
 
   temp %>%
     mutate(
@@ -358,32 +359,34 @@ df_percep <- ensu_full %>%
   mutate(trim = zoo::as.yearqtr(fecha))
 
 #* Tabla de Monterrey----
-df_percep %>%
+p1 <- df_percep %>%
   filter(var_id == "Monterrey") %>%
   select(bp3_2a, total, por, fecha) %>%
   pivot_wider(
     names_from = fecha,
     values_from = c(total, por)
   ) %>%
-  transmute(
+  mutate(
     `Conocimiento programas` = bp3_2a,
-    `Mar 2023` = paste0(percent(`por_2023-03-01`, accuracy = 0.1), " (", prettyNum(`total_2023-03-01`, big.mark = ","), ")"),
-    `Jun 2023` = paste0(percent(`por_2023-06-01`, accuracy = 0.1), " (", prettyNum(`total_2023-06-01`, big.mark = ","), ")"),
-    `Sept 2023` = paste0(percent(`por_2023-09-01`, accuracy = 0.1), " (", prettyNum(`total_2023-09-01`, big.mark = ","), ")"),
-    `Diferencia % con trimestre anterior` = paste0(round((`por_2023-09-01` - `por_2023-06-01`) * 100, digits = 1), " pp"),
-    dif_trim = `por_2023-09-01` - `por_2023-06-01`,
+    `Dic 2023` = paste0(percent(`por_2023-12-01`, accuracy = 0.1), " (", prettyNum(`total_2023-12-01`, big.mark = ","), ")"),
+    `Mar 2024` = paste0(percent(`por_2024-03-01`, accuracy = 0.1), " (", prettyNum(`total_2024-03-01`, big.mark = ","), ")"),
+    `Jun 2024` = paste0(percent(`por_2024-06-01`, accuracy = 0.1), " (", prettyNum(`total_2024-06-01`, big.mark = ","), ")"),
+    `Diferencia % con trimestre anterior` = paste0(round((`por_2024-06-01` - `por_2024-03-01`) * 100, digits = 1), " pp"),
+    dif_trim = `por_2024-06-01` - `por_2024-03-01`,
+    .keep = "none"
   ) %>%
   arrange(dif_trim) %>%
-  select(-c(dif_trim)) -> p1
+  select(-c(dif_trim))
 
 class(p1$`Conocimiento programas`)
 
-p1 %>%
+p1 <- p1 %>%
   mutate(`Conocimiento programas` = factor(`Conocimiento programas`,
     levels = c("Sí", "No", "Ns/Nc")
   )) %>%
-  arrange(`Conocimiento programas`) -> p1
+  arrange(`Conocimiento programas`)
 unique(p1$`Conocimiento programas`)
+
 p1 %>%
   write_csv("04_temp/tabla_conoc_program1.csv")
 

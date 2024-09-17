@@ -3,8 +3,6 @@ title: "ENSU Q2 2024"
 author: "Oliver Camacho"
 format: pptx
 editor: visual
-prefer-html: true
-always_allow_html: yes
 ---
 
 ```{r xaringan-themer, warning=FALSE, include=FALSE}
@@ -114,7 +112,7 @@ La **cobertura tematica de la ENSU** es la siguiente:
 
 ## Percepción en capitales
 
-```{r}
+```{r include=FALSE}
 ipsum()
 ```
 
@@ -136,7 +134,7 @@ ipsum()
 
 ::: columns
 ::: {.column width="50%"}
-```{r}
+```{r include=FALSE}
 ipsum()
 ```
 :::
@@ -331,7 +329,7 @@ ft
 :::
 
 ::: column
-```{r}
+```{r echo=FALSE}
 confianza <- read_rds(
   "04_temp/df_confianza_sp_reciente.rds"
 )
@@ -419,13 +417,13 @@ confianza_estatal <- read_rds("04_temp/df_confianza_sp.rds") %>%
 
 ::: columns
 ::: {.column width="50%"}
-```{r}
+```{r echo=FALSE}
 ft1
 ```
 :::
 
 ::: {.column width="50%"}
-```{r}
+```{r echo=FALSE}
 ft2
 ```
 :::
@@ -433,7 +431,7 @@ ft2
 
 ## Confianza y percepción de autoridades de seguridad pública
 
-```{r}
+```{r include=FALSE}
 ipsum()
 ```
 
@@ -449,10 +447,9 @@ ipsum()
 :::
 
 ::: column
-
 Se observa un decremento al pasar de 47.0% en diciembre de 2023 a 27.3% en junio de 2024.
 
-Un cuarto de los regios continúan declarando que han tenido experiencias de corrupción donde algún miembro de las autoridades de seguridad publica le insinuó, le pidió de forma directa o generó las condiciones para que les diera dinero, un regalo o favor para agilizar, aprobar, o bien, evitar infracciones o detenciones. 
+Un cuarto de los regios continúan declarando que han tenido experiencias de corrupción donde algún miembro de las autoridades de seguridad publica le insinuó, le pidió de forma directa o generó las condiciones para que les diera dinero, un regalo o favor para agilizar, aprobar, o bien, evitar infracciones o detenciones.
 
 El porcentaje nacional por estas mismas experiencias es de 47.5%, por lo que los regios reportan con menor frecuencia ese tipo de acciones.
 :::
@@ -464,31 +461,27 @@ El porcentaje nacional por estas mismas experiencias es de 47.5%, por lo que los
 
 ## Corrupción por parte de autoridades de seguridad pública
 
-```{r}
+```{r include=FALSE}
 ipsum()
 ```
 
 ## Expectativas en los proximos 12 meses
 
 ::: columns
-
-:::column
-Desde el último año, se ha avanzado de manera paulatina y las expectativas de los regios se vuelven un poco más optimistas. 
+::: column
+Desde el último año, se ha avanzado de manera paulatina y las expectativas de los regios se vuelven un poco más optimistas.
 
 Aunque, solo 1 de cada 4 personas piensa que la seguridad de Monterrey mejorará. Se encuentra 15.5 puntos por debajo del promedio nacional y **ha aumentado 10 puntos desde septiembre de 2022.**
 
 A nivel nacional el optimismo con respecto a la seguridad ha aumentado al pasar de 37.87% en el Tercer trimestre de 2022 al 40.9% en el Tercer trimestre de 2023.
-
 :::
 
 ::: column
-
 ![Expectativa de cambio](03_grafs/ensu_expect.png)
-
 :::
 :::
 
----
+------------------------------------------------------------------------
 
 ![Expectativa de cambio](03_grafs/ensu_expect_hist.png)
 
@@ -496,10 +489,184 @@ A nivel nacional el optimismo con respecto a la seguridad ha aumentado al pasar 
 
 ::: columns
 ::: column
+El **conocimiento de los programas para la prevención de delitos** se estudio por primera vez en en último trimestre de 2022.
 
+Con respecto al trimestre pasado hubo una .red\[disminución del 3.1%, más del 34.4% de los regios encuestados conoce los programas\], acercándose a la primera medición de diciembre de 2022 del 33.2% de los regios con conocimiento de los programas. Sin embargo, aún hay poca información para analizar a fondo estos datos.
 :::
-:::column
+
+::: column
+```{r echo=FALSE}
+tabla_programas <- read_csv("04_temp/tabla_conoc_program1.csv")
+
+ft <- tabla_programas %>% 
+  flextable() %>% 
+  align(
+    align = "center",
+    part = "all"
+  ) %>% 
+  bold(
+    j = c(1,4)
+  ) %>% 
+  bg(
+    j = 4, 
+    bg = c("#CE7352", "#CE7352", "#CE7352")
+    )
+
+ft
+```
 :::
 :::
 
+# Lo positivo
 
+-   La **percepción de inseguridad se mantiene por debajo de la barrera del 80%**, aproximándose a los niveles de principios de 2018.
+
+-   **Todos los índices de experiencias de inseguridad tuvieron una disminucion este trimestre**, destacando la disminución en pandillerismo, venta o consumo de drogas, vandalismo y robo o asalto.
+
+-   Desde marzo de 2022, **la confianza en la policía municipal sigue creciendo**. A pesar de ser la autoridad con menor confianza, es el cuerpo de seguridad publica que ha mantenido un incremento en la confianza.
+
+-   **Las experiencias de conflicto de la población disminuyeron en todos los indicadores**, destacando una disminución en problemas con los vecinos, problemas relacionados con animales domésticos y molestias por borrachos, drogadictos o pandillas.
+
+-   **La percepción de inseguridad en las Calles que habitualmente se usan tuvo una disminución de 10.6%** con respecto al año anterior.
+
+-   **La delicuencia como principal problema en la ciudad disminuyó en 10.3% con respecto al trimestre anterior** y en 1.9% con respecto al año pasado.
+
+-   **La expectativa de mejora sobre la situación de seguridad en la ciudad aumentó en 10% con respecto al año pasado.**
+
+# Lo negativo
+
+-   A pesar de la mejora de percepción de inseguridad desde el Segundo trimestre de 2022, con respecto al trimestre pasado **hubo un ligero aumento de 0.7%.**
+
+-   Lo anterior, también repercute en que \*\*Monterrey sigue con los números más altos del AMG\* \*y regresa al top 5 de ciudades capitales con mayor percepción de inseguridad ocupando el 4° lugar.
+
+-   La mayor percepción de inseguridad se encuentra en los **Bancos** (81.9% en ATM y 71.7% en sucursal), el **Transporte público** (67.6%), las **Calles** (66.8%) y la **Carretera** (59.5%). Con respecto al año pasado, aumentó la percepción de inseguridad en la **Carretera**, el **Centro comercial**, la **Casa**, el **Trabajo** y el **Transporte público**.
+
+-   **Problemas de recolección de basura** (+18.3%), **Fallas y suministro de agua** (+14.6%) y **Parques y jardines descuidados** (+13.7%) presentan el mayor crecimiento con respecto al trimestre anterior.
+
+-   Los problemas más grandes de la ciudad para los regios son los **Baches en calles y avenidas** (71.3%), la **Delincuencia** (58%) y los **Embotellamientos frecuentes** (44.7%).
+
+-   La recolección de basura preocupa a **5 de cada 10 regios.** Este problema ha empeorado en 19.7% en comparación con el año pasado.
+
+-   A pesar que desde el 4° trimestre de 2022 venía en aumento, **la percepción de la efectividad del gobierno para resolver problemas de la ciudad disminuyo en 0.05%**
+
+## Incidencia Delictiva del Fuero Común
+
+![Efectividad serie](03_grafs/Incidenciabarra.png)
+
+## Incidencia Delictiva del Fuero Común
+
+![Efectividad serie](03_grafs/incidencia.png)
+
+## Incidencia Delictiva del Fuero Común
+
+**La Incidencia Delictiva en Monterrey muestra una tendencia a la baja**, desde su punto más alto registrado en el 3er trimestre de 2017 ha disminuido en 37.06%. El nivel más bajo de incidencia se alcanzó el 2do trimestre de 2020 durante la pandemia de COVID-19.
+
+Al comparar **las tasas de incidencia delictiva por cada 100 mil habitantes, Monterrey se encuentra por debajo del nivel nacional** en todo el período estudiado (1T-2016 al 3T-2023). Y ha disminuido en 40.4% desde el punto más alto en el 3er trimestre de 2017. Actualmente, la tasa de incidencia por cada 100 mil habitantes a nivel nacional es 2 veces mayor que la tasa en Monterrey.
+
+Lo anterior, contrasta con el comparativo de la percepcion de inseguridad, ya que desde principios de 2018 Monterrey se encuentra por arriba de la medición nacional en percepción de inseguridad.
+
+## Delitos de Alto Impacto
+
+![Efectividad serie](03_grafs/ensu_altoimpacto.png)
+
+## Delitos de Alto Impacto
+
+![Efectividad serie](03_grafs/ensu_altoComp4.png)
+
+## Delitos de Alto Impacto
+
+Al igual que la Incidencia Delictiva del Fuero Común, **los Delitos de Alto Impacto muestran una tendencia a la baja en Monterrey** desde el ultimo trimestre de 2017 cuando alcanzó su punto más alto.
+
+Los Delitos de Alto Impacto se dividen en **Delitos Contra la Vida y Contra el Patrimonio**, aunque el total de Delitos de Alto Impacto van a la baja, su comportamiento depende de su clasificación: **Los Delitos Contra el Patrimonio contribuyen a la tendencia a la baja de la totalidad de Delitos de Alto Impacto**; mientras que, .red\[los Delitos Contra la Vida no han tenido una reducción mayor a la que tuvieron durante la pandemia\] (2T-2020 al 1T-2021).
+
+Aunque la incidencia del total de delitos del fuero común y de delitos de alto impacto han bajado, los Delitos Contra la Vida se han mantenido constantes en el último año.
+
+## Delitos del Fuero Común de Seguimiento Municipal
+
+![Efectividad serie](03_grafs/ensu_seguimientoMun.png)
+
+## Delitos del Fuero Común de Seguimiento Municipal
+
+Desde el 4to trimestre de 2021, **los Delitos del Fuero Común de Seguimiento Municipal han disminuido en 30.6%**. Su punto más alto se registró el 1er trimestre de 2019 (6,713), desde entonces se mantiene una tendencia a la baja y se ha reducido en 56.7%.
+
+El numero de **delitos registrados en el 3er trimestre de 2023 (2,126) se acerca a los niveles del 2do trimestre de 2016 (2,496)**.
+
+## Incidencia del Robo
+
+![Efectividad serie](03_grafs/ensu_robo.png)
+
+## Incidencia del Vandalismo
+
+![Efectividad serie](03_grafs/ensu_vandalismo.png)
+
+## Incidencia de Delitos con Arma de Fuego
+
+![Efectividad serie](03_grafs/ensu_disparos.png)
+
+## Incidencia de Narcomenudeo
+
+![Efectividad serie](03_grafs/ensu_narcomenudeo.png)
+
+## Incidencia de Robo, Vandalismo, Delitos con Arma de Fuego y Narcomenudeo
+
+La incidencia del **Robo mantiene una disminución constante desde el 4to trimestre de 2021** (-34.21%) y desde su punto más alto el 3er trimestre de 2017 ha disminuido en 59.68%.
+
+La incidencia del **Vandalismo tuvo una disminución con respecto al trimestre pasado de 29.2%**. Tuvo su punto más alto el 4to trimestre de 2018 y desde entonces muestra una disminución de 76.15%.
+
+La incidencia de **Delitos con Arma de Fuego** ha tenido varios repuntes durante el período estudiado, sin embargo, **mostró una disminución considerable el trimestre pasado de 39.18%.**
+
+Por último, la incidencia de **Narcomenudeo ha disminuido desde su punto más alto el 1er trimestre de 2016 (-51.4%)** y .red\[con respecto al trimestre anterior repuntó\] (+42.3%).
+
+## Incidencia Delictiva del Fuero Común
+
+**Segundo Trimestre - 2024**
+
+## Evolución de la Incidencia Delictiva
+
+![anexo1](03_grafs/anexoComp1.png)
+
+## Evolución de la Incidencia Delictiva
+
+![anexo2](03_grafs/anexoComp2.png)
+
+## Evolución de la Incidencia Delictiva
+
+La tasa de incidencia delictiva en Monterrey, .red\[tuvo su mayor aumento durante 2016\] y **comenzó a disminuir a principios de 2019**.
+
+Durante la administración actual, **la tasa Incidencia Delictiva ha mantenido un disminución constante que se acentúo a principios del segundo año de gobierno, alcanzando su punto más bajo durante el 4° trimestre de 2022.**
+
+## Evolución de los Delitos de Alto Impacto
+
+![anexo3](03_grafs/anexoComp3.png)
+
+## Evolución de los Delitos de Alto Impacto
+
+![anexo4](03_grafs/anexoComp4.png)
+
+## Evolucion de los Delitos de Alto Impacto
+
+![anexo5](03_grafs/anexoComp5.png)
+
+## Evolución de los Delitos de Alto Impacto
+
+![anexo6](03_grafs/anexoComp6.png)
+
+## Evolución de los Delitos de Alto Impacto
+
+La disminución de la tasa Incidencia Delictiva esta relacionada con la disminución de los Delitos de Alto Impacto. **Desde principios de 2019 hay una tendencia a la baja en la tasa de incidencia de Delitos de Alto Impacto.**
+
+Durante el primer año de gobierno de la administración actual, **se mantiene esta tendencia a la baja y se estabiliza por debajo de los 30 delitos de alto impacto por cada 100 mil habitantes durante el 2° año de gobierno.**
+
+## Evolución de los Delitos de Seguimiento Municipal
+
+![anexo5](03_grafs/anexoComp7.png)
+
+## Evolución de los Delitos de Seguimiento Municipal
+
+![anexo6](03_grafs/anexoComp8.png)
+
+## Evolución de los Delitos de Seguimiento Municipal
+
+De principios de 2016 a principios de 2022, .red\[la tasa de Delitos de Seguimiento Municipal tuvo un compartamiento variable, con picos a la alta.\]
+
+A inicios de la administración actual, **se presentó una disminucion sostenida en la tasa de incidencia delictiva en los Delitos de Seguimiento Municipal durante el primer año de gobierno**, misma que **se estabilizó alrededor de los 50 delitos por cada 100 mil habitantes durante el segundo año de gobierno.**
