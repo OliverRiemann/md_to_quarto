@@ -281,44 +281,28 @@ files <- list.files(
   ignore.case = TRUE
 )
 #* Limpiar bases----
-files_temp <- files[(grep("0923|0323|0623", files, ignore.case = T))]
+(files_temp <- files[(grep("1223|0324|0624", files, ignore.case = T))])
 #* Serie de tiempo confianza en autoridades de SP
 #*
 
 #* Limpiar bases----
-map(files_temp, function(x) {
-  # x = files[1]
+ensu_full <- map(files_temp, function(x) {
+  # x <- files_temp[1]
 
   print(x)
 
-  fecha <- str_extract(x, "(?<=ENSU_CB_)(\\d+)")
+  fecha_var <- str_extract(x, "(?<=ENSU_CB_)(\\d+)")
 
-  if (grepl("0323|0623|0923", x, ignore.case = T)) {
-    foreign::read.dbf(x) %>%
-      clean_names() %>%
-      rename(
-        CVE_ENT = cve_ent,
-        CVE_MUN = cve_mun
-      ) -> temp
-  } else if (grepl("0316|0616|0916", x, ignore.case = T)) {
-    foreign::read.dbf(x) %>%
-      clean_names() %>%
-      rename(
-        CVE_ENT = ent,
-        CVE_MUN = mun
-      ) -> temp
-  } else {
-    foreign::read.dbf(x) %>%
-      clean_names() -> temp
-  }
+  
+  temp <- foreign::read.dbf(x) %>%
+      clean_names()
 
   temp %>%
     mutate(
       fac_sel = as.numeric(fac_sel),
       var_id = "nacional",
       var_cd = case_when(
-        cve_ent == "19" & CVE_MUN == "039" ~ "Monterrey",
-        grepl("16$|17$|0318", fecha_var, ignore.case = T) & cd == 24 ~ "Monterrey",
+        cve_ent == "19" & cve_mun == "039" ~ "Monterrey",
         T ~ "otro"
       )
     ) %>%
@@ -367,14 +351,14 @@ map(files_temp, function(x) {
     ) %>%
     drop_na(var_id) %>%
     select(-matches("cv|var_cd")) -> data
-}) -> ensu_full
+})
 
-ensu_full %>%
+df_percep <- ensu_full %>%
   reduce(full_join) %>%
-  mutate(trim = zoo::as.yearqtr(fecha)) -> df_percp
+  mutate(trim = zoo::as.yearqtr(fecha))
 
 #* Tabla de Monterrey----
-df_percp %>%
+df_percep %>%
   filter(var_id == "Monterrey") %>%
   select(bp3_2a, total, por, fecha) %>%
   pivot_wider(

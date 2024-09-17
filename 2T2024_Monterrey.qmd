@@ -380,7 +380,8 @@ ft
 
 confianza_ppm <- read_rds(
   "04_temp/df_confianza_policia.rds"
-)
+) %>% 
+  arrange(desc(fecha))
 
 # Primera mitad de la tabla
 (ft1 <- confianza_ppm %>% 
@@ -394,6 +395,111 @@ confianza_ppm <- read_rds(
   set_formatter(
     por = function(x) label_percent(0.1)(x)
   ))
-  
-# Segunda mitad de la tabla 
+
+confianza_estatal <- read_rds("04_temp/df_confianza_sp.rds") %>% 
+  filter(
+    var == "Policía Estatal"
+  ) %>% 
+  arrange(desc(fecha))
+
+(ft2 <- confianza_estatal %>% 
+  select(-fecha) %>% 
+  head(10) %>% 
+  flextable() %>%
+  width(
+    j = "var",
+    width = 1.5
+  ) %>% 
+  set_formatter(
+    por = function(x) label_percent(0.1)(x)
+  ))
+
+
 ```
+
+::: columns
+::: {.column width="50%"}
+```{r}
+ft1
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+ft2
+```
+:::
+:::
+
+## Confianza y percepción de autoridades de seguridad pública
+
+```{r}
+ipsum()
+```
+
+## Efectividad del gobierno
+
+![Efectividad serie](03_grafs/ensu_efectividad_P.png)
+
+## Corrupción por parte de autoridades de seguridad pública
+
+::: columns
+::: column
+![Corrupcion autoridades SP](03_grafs/ensu_corrupcion.png)
+:::
+
+::: column
+
+Se observa un decremento al pasar de 47.0% en diciembre de 2023 a 27.3% en junio de 2024.
+
+Un cuarto de los regios continúan declarando que han tenido experiencias de corrupción donde algún miembro de las autoridades de seguridad publica le insinuó, le pidió de forma directa o generó las condiciones para que les diera dinero, un regalo o favor para agilizar, aprobar, o bien, evitar infracciones o detenciones. 
+
+El porcentaje nacional por estas mismas experiencias es de 47.5%, por lo que los regios reportan con menor frecuencia ese tipo de acciones.
+:::
+:::
+
+## Corrupción por parte de autoridades de seguridad pública
+
+![Efectividad serie](03_grafs/ensu_corruphist.png)
+
+## Corrupción por parte de autoridades de seguridad pública
+
+```{r}
+ipsum()
+```
+
+## Expectativas en los proximos 12 meses
+
+::: columns
+
+:::column
+Desde el último año, se ha avanzado de manera paulatina y las expectativas de los regios se vuelven un poco más optimistas. 
+
+Aunque, solo 1 de cada 4 personas piensa que la seguridad de Monterrey mejorará. Se encuentra 15.5 puntos por debajo del promedio nacional y **ha aumentado 10 puntos desde septiembre de 2022.**
+
+A nivel nacional el optimismo con respecto a la seguridad ha aumentado al pasar de 37.87% en el Tercer trimestre de 2022 al 40.9% en el Tercer trimestre de 2023.
+
+:::
+
+::: column
+
+![Expectativa de cambio](03_grafs/ensu_expect.png)
+
+:::
+:::
+
+---
+
+![Expectativa de cambio](03_grafs/ensu_expect_hist.png)
+
+## Conocimiento de los programas para la prevención de delitos
+
+::: columns
+::: column
+
+:::
+:::column
+:::
+:::
+
+
