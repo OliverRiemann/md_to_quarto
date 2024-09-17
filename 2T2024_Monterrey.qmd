@@ -382,7 +382,7 @@ confianza_ppm <- read_rds(
   arrange(desc(fecha))
 
 # Primera mitad de la tabla
-(ft1 <- confianza_ppm %>% 
+ft1 <- confianza_ppm %>% 
   select(-fecha) %>% 
   head(10) %>% 
   flextable() %>%
@@ -392,15 +392,15 @@ confianza_ppm <- read_rds(
   ) %>% 
   set_formatter(
     por = function(x) label_percent(0.1)(x)
-  ))
+  )
 
 confianza_estatal <- read_rds("04_temp/df_confianza_sp.rds") %>% 
   filter(
-    var == "Policía Estatal"
+    var == "Policia Estatal"
   ) %>% 
   arrange(desc(fecha))
 
-(ft2 <- confianza_estatal %>% 
+ft2 <- confianza_estatal %>% 
   select(-fecha) %>% 
   head(10) %>% 
   flextable() %>%
@@ -410,9 +410,7 @@ confianza_estatal <- read_rds("04_temp/df_confianza_sp.rds") %>%
   ) %>% 
   set_formatter(
     por = function(x) label_percent(0.1)(x)
-  ))
-
-
+  )
 ```
 
 ::: columns
@@ -517,7 +515,7 @@ ft
 :::
 :::
 
-# Lo positivo
+## Lo positivo
 
 -   La **percepción de inseguridad se mantiene por debajo de la barrera del 80%**, aproximándose a los niveles de principios de 2018.
 
@@ -533,7 +531,7 @@ ft
 
 -   **La expectativa de mejora sobre la situación de seguridad en la ciudad aumentó en 10% con respecto al año pasado.**
 
-# Lo negativo
+## Lo negativo
 
 -   A pesar de la mejora de percepción de inseguridad desde el Segundo trimestre de 2022, con respecto al trimestre pasado **hubo un ligero aumento de 0.7%.**
 
@@ -589,7 +587,7 @@ Aunque la incidencia del total de delitos del fuero común y de delitos de alto
 
 Desde el 4to trimestre de 2021, **los Delitos del Fuero Común de Seguimiento Municipal han disminuido en 30.6%**. Su punto más alto se registró el 1er trimestre de 2019 (6,713), desde entonces se mantiene una tendencia a la baja y se ha reducido en 56.7%.
 
-El numero de **delitos registrados en el 3er trimestre de 2023 (2,126) se acerca a los niveles del 2do trimestre de 2016 (2,496)**.
+El número de **delitos registrados en el 3er trimestre de 2023 (2,126) se acerca a los niveles del 2do trimestre de 2016 (2,496)**.
 
 ## Incidencia del Robo
 
@@ -617,9 +615,7 @@ La incidencia de **Delitos con Arma de Fuego** ha tenido varios repuntes durante
 
 Por último, la incidencia de **Narcomenudeo ha disminuido desde su punto más alto el 1er trimestre de 2016 (-51.4%)** y .red\[con respecto al trimestre anterior repuntó\] (+42.3%).
 
-## Incidencia Delictiva del Fuero Común
-
-**Segundo Trimestre - 2024**
+## Incidencia Delictiva del Fuero Común **Segundo Trimestre - 2024**
 
 ## Evolución de la Incidencia Delictiva
 
@@ -670,3 +666,4 @@ Durante el primer año de gobierno de la administración actual, **se mantiene
 De principios de 2016 a principios de 2022, .red\[la tasa de Delitos de Seguimiento Municipal tuvo un compartamiento variable, con picos a la alta.\]
 
 A inicios de la administración actual, **se presentó una disminucion sostenida en la tasa de incidencia delictiva en los Delitos de Seguimiento Municipal durante el primer año de gobierno**, misma que **se estabilizó alrededor de los 50 delitos por cada 100 mil habitantes durante el segundo año de gobierno.**
+
