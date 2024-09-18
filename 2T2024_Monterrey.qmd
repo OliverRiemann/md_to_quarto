@@ -515,6 +515,8 @@ ft
 :::
 :::
 
+# Lo positivo
+
 ## Lo positivo
 
 -   La **percepción de inseguridad se mantiene por debajo de la barrera del 80%**, aproximándose a los niveles de principios de 2018.
@@ -530,6 +532,8 @@ ft
 -   **La delicuencia como principal problema en la ciudad disminuyó en 10.3% con respecto al trimestre anterior** y en 1.9% con respecto al año pasado.
 
 -   **La expectativa de mejora sobre la situación de seguridad en la ciudad aumentó en 10% con respecto al año pasado.**
+
+# Lo negativo
 
 ## Lo negativo
 
@@ -666,4 +670,3 @@ Durante el primer año de gobierno de la administración actual, **se mantiene
 De principios de 2016 a principios de 2022, .red\[la tasa de Delitos de Seguimiento Municipal tuvo un compartamiento variable, con picos a la alta.\]
 
 A inicios de la administración actual, **se presentó una disminucion sostenida en la tasa de incidencia delictiva en los Delitos de Seguimiento Municipal durante el primer año de gobierno**, misma que **se estabilizó alrededor de los 50 delitos por cada 100 mil habitantes durante el segundo año de gobierno.**
-
